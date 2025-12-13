@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 import { CountryConfig, COUNTRIES, DEFAULT_COUNTRY } from '../utils/countries';
 
 interface CountryContextType {

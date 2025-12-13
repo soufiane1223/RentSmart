@@ -1,5 +1,4 @@
 import React from 'react';
-import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -11,7 +10,7 @@ export function GlassCard({ children, className, ...props }: GlassCardProps) {
     return (
         <div
             className={twMerge(
-                "bg-white/80 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-6",
+                "bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border border-white/20 dark:border-slate-700 shadow-xl rounded-2xl p-6",
                 className
             )}
             {...props}

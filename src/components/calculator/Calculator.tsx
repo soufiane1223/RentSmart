@@ -26,11 +26,11 @@ export function Calculator() {
 
             {/* Input Section */}
             <GlassCard className="flex-1">
-                <div className="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
-                    <div className="p-2 bg-blue-50 text-blue-600 rounded-lg">
+                <div className="flex items-center gap-3 mb-6 border-b border-slate-100 dark:border-slate-700 pb-4">
+                    <div className="p-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg">
                         <CalcIcon size={24} />
                     </div>
-                    <h2 className="text-xl font-bold text-slate-800">{t('calculator.propertyDetails')}</h2>
+                    <h2 className="text-xl font-bold text-slate-800 dark:text-white">{t('calculator.propertyDetails')}</h2>
                 </div>
 
                 <InputGroup
