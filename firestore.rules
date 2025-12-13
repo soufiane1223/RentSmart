@@ -1,0 +1,57 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Helper function to check if user owns the document
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    // Calculations collection
+    match /calculations/{calculationId} {
+      // Users can read their own calculations
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      
+      // Users can create calculations for themselves
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      
+      // Users can update their own calculations
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      
+      // Users can delete their own calculations
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+    
+    // User favorites collection
+    match /userFavorites/{favoriteId} {
+      // Users can read their own favorites
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      
+      // Users can create favorites for themselves
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      
+      // Users can delete their own favorites
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+    
+    // Saved properties collection
+    match /savedProperties/{propertyId} {
+      // Users can read their own saved properties
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      
+      // Users can create saved properties for themselves
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      
+      // Users can update their own saved properties
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      
+      // Users can delete their own saved properties
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+  }
+}

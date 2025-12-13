@@ -1,0 +1,44 @@
+{
+    "app": {
+        "title": "RentSmart",
+        "subtitle": "Calculateur d'Investissement Immobilier",
+        "footer": "Conçu pour le Marché Marocain 🇲🇦"
+    },
+    "calculator": {
+        "propertyDetails": "Détails de la Propriété",
+        "investmentAnalysis": "Analyse d'Investissement",
+        "purchasePrice": "Prix d'Achat",
+        "monthlyRent": "Loyer Mensuel",
+        "grossYield": "Rendement Brut",
+        "annualYield": "Rendement Annuel",
+        "annualRevenue": "Revenu Annuel",
+        "monthly": "Mensuel"
+    },
+    "verdict": {
+        "bad": "À Éviter",
+        "average": "Moyen",
+        "good": "Bonne Affaire",
+        "excellent": "Excellent"
+    },
+    "verdictDescription": {
+        "tooLow": "Trop faible - Pas un bon investissement",
+        "safeLow": "Sûr mais rendement faible",
+        "standard": "Affaire Standard du Marché",
+        "profitable": "Investissement Rentable",
+        "highProfit": "Haute Rentabilité / Affaire Rare"
+    },
+    "language": {
+        "select": "Langue",
+        "english": "Anglais",
+        "french": "Français",
+        "arabic": "Arabe"
+    },
+    "country": {
+        "select": "Pays",
+        "morocco": "Maroc",
+        "france": "France",
+        "usa": "États-Unis",
+        "uk": "Royaume-Uni",
+        "uae": "Émirats Arabes Unis"
+    }
+}
