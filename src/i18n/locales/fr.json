@@ -40,5 +40,19 @@
         "usa": "États-Unis",
         "uk": "Royaume-Uni",
         "uae": "Émirats Arabes Unis"
+    },
+    "monetization": {
+        "listProperty": "Mettre en Gestion / Louer",
+        "getReport": "Obtenir le Rapport Détaillé",
+        "modalTitle": "Maximisez Vos Revenus Locatifs",
+        "modalSubtitle": "Parlez à nos experts en gestion locative pour obtenir le meilleur rendement.",
+        "name": "Nom Complet",
+        "phone": "Numéro de Téléphone",
+        "email": "Adresse Email",
+        "submit": "Demander une Consultation",
+        "success": "Merci ! Nous vous contacterons bientôt.",
+        "premiumTitle": "Débloquez les Analyses Premium",
+        "premiumDesc": "Obtenez un rapport d'analyse d'investissement détaillé de 10 pages pour ce bien.",
+        "unlock": "Débloquer pour"
     }
 }

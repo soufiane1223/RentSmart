@@ -5,15 +5,29 @@ import { CountryProvider } from './context/CountryContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { ModeToggle } from './components/ui/ModeToggle';
 import { useTranslation } from 'react-i18next';
+import { analytics } from './services/analytics';
 
-import { SEO } from './components/layout/SEO';
+import { Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import { Login } from './pages/Login';
+import { Signup } from './pages/Signup';
+import { PrivateRoute } from './PrivateRoute';
+import { LogOut } from 'lucide-react';
+import { logOut } from './services/authService';
 
-function AppContent() {
+function AppLayout() {
     const { t, i18n } = useTranslation();
 
+    const handleBannerClick = (type: string) => {
+        analytics.trackAffiliateClick(type, 'main_dashboard');
+    };
+
+    const handleLogout = async () => {
+        await logOut();
+    };
+
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8 font-sans transition-colors duration-300" dir={i18n.dir()}>
-            <SEO />
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8 font-sans transition-colors duration-300 min-w-min" dir={i18n.dir()}>
             <div className="absolute inset-0 bg-grid-slate-200/[0.04] bg-[bottom_1px_center] dark:bg-grid-slate-400/[0.05] -z-10" />
             <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-emerald-50/50 dark:from-blue-950/30 dark:to-emerald-950/30 -z-10 pointer-events-none" />
 
@@ -28,6 +42,13 @@ function AppContent() {
                     <div className="h-8 w-px bg-slate-200 dark:bg-slate-700 mx-1" />
                     <CountrySelector />
                     <LanguageSwitcher />
+                    <button
+                        onClick={handleLogout}
+                        className="p-2 ml-2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition-colors"
+                        title="Sign out"
+                    >
+                        <LogOut size={20} />
+                    </button>
                 </div>
             </div>
 
@@ -45,7 +66,10 @@ function AppContent() {
                     <Calculator />
 
                     {/* Affiliate Banner */}
-                    <div className="mt-8 overflow-hidden rounded-xl shadow-lg cursor-pointer hover:shadow-xl hover:scale-[1.01] transition-all bg-white dark:bg-slate-900">
+                    <div
+                        onClick={() => handleBannerClick('mortgage_broker')}
+                        className="mt-8 overflow-hidden rounded-xl shadow-lg cursor-pointer hover:shadow-xl hover:scale-[1.01] transition-all bg-white dark:bg-slate-900"
+                    >
                         <img src="/banner-mortgage.png" alt="Get Best Mortgage Rates" className="w-full h-auto object-cover opacity-90 hover:opacity-100 transition-opacity" />
                     </div>
                 </div>
@@ -60,7 +84,12 @@ function AppContent() {
                     <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-6 rounded-xl border border-blue-100 dark:border-blue-800/50">
                         <h3 className="font-bold text-blue-900 dark:text-blue-100 mb-2">Need Help?</h3>
                         <p className="text-sm text-blue-700 dark:text-blue-300 mb-4">Talk to our real estate experts today for personalized advice.</p>
-                        <button className="w-full py-2.5 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition-all">Contact Us</button>
+                        <button
+                            onClick={() => handleBannerClick('sidebar_consultation')}
+                            className="w-full py-2.5 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition-all"
+                        >
+                            Contact Us
+                        </button>
                     </div>
                 </div>
             </div>
@@ -75,9 +104,19 @@ function AppContent() {
 function App() {
     return (
         <ThemeProvider defaultTheme="light" storageKey="rentsmart-theme">
-            <CountryProvider>
-                <AppContent />
-            </CountryProvider>
+            <AuthProvider>
+                <CountryProvider>
+                    <Routes>
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/signup" element={<Signup />} />
+                        <Route path="/" element={
+                            <PrivateRoute>
+                                <AppLayout />
+                            </PrivateRoute>
+                        } />
+                    </Routes>
+                </CountryProvider>
+            </AuthProvider>
         </ThemeProvider>
     );
 }

@@ -40,5 +40,19 @@
         "usa": "United States",
         "uk": "United Kingdom",
         "uae": "United Arab Emirates"
+    },
+    "monetization": {
+        "listProperty": "List / Manage Property",
+        "getReport": "Get Detailed Report",
+        "modalTitle": "Maximise Your Rental Income",
+        "modalSubtitle": "Talk to our property management experts to get the best yield.",
+        "name": "Full Name",
+        "phone": "Phone Number",
+        "email": "Email Address",
+        "submit": "Request Consultation",
+        "success": "Thanks! We will contact you shortly.",
+        "premiumTitle": "Unlock Premium Insights",
+        "premiumDesc": "Get a detailed 10-page investment analysis report for this property.",
+        "unlock": "Unlock for"
     }
 }

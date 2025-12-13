@@ -6,7 +6,9 @@ import {
     GoogleAuthProvider,
     signInWithPopup,
     sendPasswordResetEmail,
-    updateProfile
+    updateProfile,
+    User,
+    NextOrObserver
 } from 'firebase/auth';
 import { auth } from '../config/firebase';
 
@@ -15,8 +17,15 @@ import { auth } from '../config/firebase';
  * Handles all Firebase Authentication operations
  */
 
+interface AuthResponse {
+    success: boolean;
+    user?: User;
+    error?: string;
+    code?: string;
+}
+
 // Sign up with email and password
-export const signUp = async (email, password, displayName = '') => {
+export const signUp = async (email: string, password: string, displayName = ''): Promise<AuthResponse> => {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
@@ -29,7 +38,7 @@ export const signUp = async (email, password, displayName = '') => {
             success: true,
             user: userCredential.user
         };
-    } catch (error) {
+    } catch (error: any) {
         return {
             success: false,
             error: error.message,
@@ -39,14 +48,14 @@ export const signUp = async (email, password, displayName = '') => {
 };
 
 // Sign in with email and password
-export const signIn = async (email, password) => {
+export const signIn = async (email: string, password: string): Promise<AuthResponse> => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         return {
             success: true,
             user: userCredential.user
         };
-    } catch (error) {
+    } catch (error: any) {
         return {
             success: false,
             error: error.message,
@@ -56,7 +65,7 @@ export const signIn = async (email, password) => {
 };
 
 // Sign in with Google
-export const signInWithGoogle = async () => {
+export const signInWithGoogle = async (): Promise<AuthResponse> => {
     try {
         const provider = new GoogleAuthProvider();
         const userCredential = await signInWithPopup(auth, provider);
@@ -64,7 +73,7 @@ export const signInWithGoogle = async () => {
             success: true,
             user: userCredential.user
         };
-    } catch (error) {
+    } catch (error: any) {
         return {
             success: false,
             error: error.message,
@@ -74,11 +83,11 @@ export const signInWithGoogle = async () => {
 };
 
 // Sign out
-export const logOut = async () => {
+export const logOut = async (): Promise<{ success: boolean; error?: string }> => {
     try {
         await signOut(auth);
         return { success: true };
-    } catch (error) {
+    } catch (error: any) {
         return {
             success: false,
             error: error.message
@@ -87,11 +96,11 @@ export const logOut = async () => {
 };
 
 // Reset password
-export const resetPassword = async (email) => {
+export const resetPassword = async (email: string): Promise<{ success: boolean; error?: string; code?: string }> => {
     try {
         await sendPasswordResetEmail(auth, email);
         return { success: true };
-    } catch (error) {
+    } catch (error: any) {
         return {
             success: false,
             error: error.message,
@@ -101,11 +110,11 @@ export const resetPassword = async (email) => {
 };
 
 // Auth state observer
-export const onAuthChange = (callback) => {
+export const onAuthChange = (callback: NextOrObserver<User | null>) => {
     return onAuthStateChanged(auth, callback);
 };
 
 // Get current user
-export const getCurrentUser = () => {
+export const getCurrentUser = (): User | null => {
     return auth.currentUser;
 };
