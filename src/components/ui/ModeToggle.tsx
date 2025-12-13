@@ -1,6 +1,5 @@
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "../../context/ThemeContext"
-import { GlassCard } from "./GlassCard"
 
 export function ModeToggle() {
     const { setTheme, theme } = useTheme()

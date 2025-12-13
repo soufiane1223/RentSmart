@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-type Theme = 'dark' | 'light';
+type Theme = 'dark' | 'light' | 'system';
 
 interface ThemeProviderProps {
     children: React.ReactNode;
@@ -14,7 +14,7 @@ interface ThemeProviderState {
 }
 
 const initialState: ThemeProviderState = {
-    theme: 'light',
+    theme: 'system',
     setTheme: () => null,
 };
 
@@ -22,7 +22,7 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
 export function ThemeProvider({
     children,
-    defaultTheme = 'light',
+    defaultTheme = 'system',
     storageKey = 'vite-ui-theme',
 }: ThemeProviderProps) {
     const [theme, setTheme] = useState<Theme>(() => {
@@ -56,7 +56,7 @@ export function ThemeProvider({
     };
 
     return (
-        <ThemeProviderContext.Provider value={value} {...{ value }}>
+        <ThemeProviderContext.Provider value={value}>
             {children}
         </ThemeProviderContext.Provider>
     );
