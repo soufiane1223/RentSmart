@@ -6,11 +6,14 @@ import { ThemeProvider } from './context/ThemeContext';
 import { ModeToggle } from './components/ui/ModeToggle';
 import { useTranslation } from 'react-i18next';
 
+import { SEO } from './components/layout/SEO';
+
 function AppContent() {
     const { t, i18n } = useTranslation();
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8 font-sans transition-colors duration-300" dir={i18n.dir()}>
+            <SEO />
             <div className="absolute inset-0 bg-grid-slate-200/[0.04] bg-[bottom_1px_center] dark:bg-grid-slate-400/[0.05] -z-10" />
             <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-emerald-50/50 dark:from-blue-950/30 dark:to-emerald-950/30 -z-10 pointer-events-none" />
 
