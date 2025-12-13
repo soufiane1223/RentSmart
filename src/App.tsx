@@ -18,7 +18,7 @@ function AppContent() {
             <div className="max-w-6xl mx-auto mb-8 flex justify-between items-center">
                 <div className="flex items-center gap-3">
                     {/* Logo updated to be larger ("h-16" instead of "h-12") */}
-                    <img src="/logo.png" alt="RentSmart Logo" className="h-20 w-auto" />
+                    <img src="/logo.png" alt="RentSmart Logo" className="h-[9rem] w-auto" />
                 </div>
                 <div className="flex gap-3 items-center">
                     <ModeToggle />
